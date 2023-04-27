@@ -1,2 +1,3 @@
 # 2023-WAI-stable-diffusion
-디퓨전
+
+#최종취합용 repository
