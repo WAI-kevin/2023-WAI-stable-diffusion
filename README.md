@@ -1,24 +1,22 @@
-# 2023-WAI-stable-diffusion
+2023-WAI-stable-diffusion
 =====
-fff
------
-> 데이터 수집, 데이터 가공, 데이터 예측, 예측 결과 평가
+# Branch - Team
+> 각 팀 리더가 팀별 폴더에 작업 결과물 업로드 및 커밋
+
+### Prompt Engineering (김은빈)
+### Modeling (서지원, 김범진)
+### Backend (최보영, 이지연, 강진석)
+### Frontend (윤도경)
 
 ---
-
-|구분|카테고리|아이디|함수명|한글명|내용|비고| 
-|:---:|:---:|:---:|:---:|:---:|:---|:---|
-|Process|PAPA|P00010|collecting|크롤링|데이터 수집|STEP:1,아침:M,저녁:E|
-|Process|PAPA|P00020|assessment|평가|예측 결과 평가|STEP:2|
-|Process|PAPA|P00030|training|학습|모델 학습|STEP:3|
-|Process|PAPA|P00040|prediction|예측|다음 포인트 예측|STEP:4|
+## 커밋 현황 (윤수민)
+|Team|날짜|변경사항(Commit Message)|
+|:---:|:---:|:---|
+|Prompt|2023.05.25|WAI_SD_Prompt_v0.5 업로드|
 ||||||||
-|Utilities|UNIFORM|U00010|line_logging|로깅 함수|데이터 유형에 상관없이 로그를 기록|-|
-|Utilities|UNIFORM|U00020|get_html|크롤링|get/post 방식 데이터 크롤링|-|
+|Modeling|2023.05.25|WAI_SD_Prompt_v0.5 업로드|
 ||||||||
----
+|Backend|2023.05.25|WAI_SD_Prompt_v0.5 업로드|
+||||||||
+|Frontend|2023.05.25|WAI_SD_Prompt_v0.5 업로드|
 
-
-
-# main에서 최종취합 
- 일정 변경후 공지 예정
