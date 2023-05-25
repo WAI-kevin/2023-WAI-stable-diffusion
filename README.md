@@ -1,5 +1,6 @@
 2023-WAI-stable-diffusion
 =====
+https://docs.google.com/spreadsheets/d/1Kv0j0DuvL8gdNI38h110kOWvI5wmrC_Sv45lwh-WQ3g/edit?usp=sharing
 ## Branch - Team
 > 각 팀 리더가 팀별 폴더에 작업 결과물 업로드 및 커밋
 ---
