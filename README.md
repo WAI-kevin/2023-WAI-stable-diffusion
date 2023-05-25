@@ -1,6 +1,6 @@
 2023-WAI-stable-diffusion
 =====
-# Branch - Team
+## Branch - Team
 > 각 팀 리더가 팀별 폴더에 작업 결과물 업로드 및 커밋
 
 ### Prompt Engineering (김은빈)
