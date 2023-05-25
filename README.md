@@ -5,6 +5,7 @@
 > 각 팀 리더가 팀별 폴더에 작업 결과물 업로드 및 커밋
 ---
 ### Prompt Engineering (김은빈)
+[Prompt Engineering](https://github.com/WAI-kevin/2023-WAI-stable-diffusion/tree/2906067a6d89466d7bc21a4b05c81b4b537393f5/01.Prompt)
 ### Modeling (서지원, 김범진)
 ### Backend (최보영, 이지연, 강진석)
 ### Frontend (윤도경)
