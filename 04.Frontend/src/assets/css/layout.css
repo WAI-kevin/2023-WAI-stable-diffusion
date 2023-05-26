@@ -1,0 +1,66 @@
+.layout {
+  height: 100vh;
+}
+
+/* ---------------------- top nav -------------------------- */
+.top-nav {
+  height: 70px;
+  display: flex;
+  width: 100%;
+  min-width: 990px;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  background: #eaeef6 !important;
+  z-index: 999;
+  padding-right: 45px;
+}
+.top-nav .mdi-account-circle, .top-nav .mdi-bell {
+  color:#304786;
+}
+.top-nav .menu-title {
+  display: flex;
+  gap: 30px;
+  color: #3C59A7;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.top-nav .menu-title .router-link-exact-active {
+  color: #3C59A7;
+  border-bottom: 2px solid #3C59A7;
+}
+.top-nav .wai-logo img {
+  content: url(@/assets/img/ic_BS_WAI_Logo.png);
+  width: 110px
+}
+
+/* --------------------- main panel ------------------------ */
+.main-panel {
+    width: 100%;
+    height: 100%;
+    background: #dae1f5 !important;
+    overflow: scroll;
+    padding-bottom: 15px;
+}
+
+/* --------------------- main-content ------------------------ */
+.main-content {
+  position: relative;
+  min-width: 990px;
+  min-height: 600px;
+  top: 70px;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-bottom: 70px;
+}
+
+/* --------------------- footer bar ------------------------ */
+.footer-bar {
+  position: fixed;
+  padding: 6px 30px 6px 30px;
+  bottom: 15px;
+  width: 100%;
+  min-width: 990px;
+  background: #eaeef6 !important;
+  font-size: 0.9rem
+}

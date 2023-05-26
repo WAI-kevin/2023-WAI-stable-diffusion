@@ -1,0 +1,59 @@
+/*Menu style*/
+.menu .menu-group {
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    font-size: 13px;
+}
+.Dark .menu .menu-group {color: #969FAE;}
+.Light .menu .menu-group {color: #797A81;}
+
+.Dark .menu .ico_menu {content: url("@/assets/img/ico_menu_dark.png");}
+.Light .menu .ico_menu {content: url("@/assets/img/ico_menu_light.png");}
+
+.Dark .menu .ico_menu-1 {content: url("@/assets/img/ico_menu1_dark_off.png");}
+.Dark .menu .router-link-exact-active .ico_menu-1 {content: url("@/assets/img/ico_menu1_dark_on.png");}
+.Dark .menu .ico_menu-2 {content: url("@/assets/img/ico_menu2_dark_off.png");}
+.Dark .menu .router-link-exact-active .ico_menu-2 {content: url("@/assets/img/ico_menu2_dark_on.png");}
+.Dark .menu .ico_menu-3 {content: url("@/assets/img/ico_menu3_dark_off.png");}
+.Dark .menu .router-link-exact-active .ico_menu-3 {content: url("@/assets/img/ico_menu3_dark_on.png");}
+.Dark .menu .ico_menu-4 {content: url("@/assets/img/ico_menu4_dark_off.png");}
+.Dark .menu .router-link-exact-active .ico_menu-4 {content: url("@/assets/img/ico_menu4_dark_on.png");}
+.Dark .menu .ico_menu-5 {content: url("@/assets/img/ico_menu5_dark_off.png");}
+.Dark .menu .router-link-exact-active .ico_menu-5 {content: url("@/assets/img/ico_menu5_dark_on.png");}
+
+.Light .menu .ico_menu-1 {content: url("@/assets/img/ico_menu1_light_off.png");}
+.Light .menu .router-link-exact-active .ico_menu-1 {content: url("@/assets/img/ico_menu1_light_on.png");}
+.Light .menu .ico_menu-2 {content: url("@/assets/img/ico_menu2_light_off.png");}
+.Light .menu .router-link-exact-active .ico_menu-2 {content: url("@/assets/img/ico_menu2_light_on.png");}
+.Light .menu .ico_menu-3 {content: url("@/assets/img/ico_menu3_light_off.png");}
+.Light .menu .router-link-exact-active .ico_menu-3 {content: url("@/assets/img/ico_menu3_light_on.png");}
+.Light .menu .ico_menu-4 {content: url("@/assets/img/ico_menu4_light_off.png");}
+.Light .menu .router-link-exact-active .ico_menu-4 {content: url("@/assets/img/ico_menu4_light_on.png");}
+.Light .menu .ico_menu-5 {content: url("@/assets/img/ico_menu5_light_off.png");}
+.Light .menu .router-link-exact-active .ico_menu-5 {content: url("@/assets/img/ico_menu5_light_on.png");}
+
+.Dark .menu.back-groud {background: #242A38;}
+.Light .menu.back-groud {background: #DDDEE3;}
+
+.Dark .menu .router-link-exact-active {
+    background: #1B202A;
+    color: #ffffff !important;
+}
+.Dark .menu .router-link-exact-active div{
+    border-left: 6px solid #6F82FC;
+    width: 100%;
+    text-align: center;
+}
+
+.Light .menu .router-link-exact-active {
+    background: #7084FF;
+    color: #ffffff !important;
+}
+.Light .menu .router-link-exact-active div{
+    border-left: 6px solid #ffffff;
+    width: 100%;
+    text-align: center;
+}

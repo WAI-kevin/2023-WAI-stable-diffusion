@@ -1,0 +1,226 @@
+.error { position: relative; width: 100%; height: calc(100% - 30px); background: url('@/assets/img/bg_error1.svg') right center no-repeat; background-size: contain; }
+.error .txt-group { position: absolute; top: 50%; left: 20%; transform: translate(-50%, -50%) scale(1); -webkit-transform: translate(-50%, -50%) scale(1); -moz-transform: translate(-50%, -50%) scale(1); -ms-transform: translate(-50%, -50%) scale(1); -o-transform: translate(-50%, -50%) scale(1); }
+.error .txt-group .txt { margin-bottom: 10px; font-size: 70px; font-weight: 700; color: #222b45; }
+.error .txt-group .txt2 { margin-bottom: 40px; font-size: 14px; font-weight: 700; color: #222b45; line-height: 24px; }
+.error .txt-group .btn { display: flex; justify-content: center; align-items: center; width: 110px; height: 36px; border-radius: 8px; box-sizing: border-box; background: #202a44; font-size: 13px; font-weight: 700; color: #fff; text-align: center; }
+.error .img-error { position: absolute; top: 50%; left: 63%; transform: translate(-50%, -50%) scale(1); -webkit-transform: translate(-50%, -50%) scale(1); -moz-transform: translate(-50%, -50%) scale(1); -ms-transform: translate(-50%, -50%) scale(1); -o-transform: translate(-50%, -50%) scale(1); }
+.error .container {height: 100%; padding: 30px 40px; box-sizing: border-box;}
+
+/* --------------------- login ------------------------ */
+.login {
+    background: url(@/assets/img/bg_login.png);
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-card {
+    background: url(@/assets/img/bg-login-content.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    text-align: center;
+}
+.login-logo {
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-logo img{
+    content: url(@/assets/img/ic_BS_WAI_Logo.png);
+    width: 150px;
+    filter: drop-shadow(3px 3px 3px #cacaca);
+}
+.login-sign {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9rem;
+  padding-top: 15px;
+  gap: 15px;
+}
+.login-sign a {
+  color:#747474;
+}
+.login .v-messages__message {
+  color: red;
+}
+.social-login {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+/* --------------------- Mdl Classifier ------------------------ */
+.mdl-classifier {
+    padding: 0 30px 30px 30px;
+    height: 100%;
+  }
+  .mdl-classifier .v-card-item {
+    padding: 16px;
+    background: #5B73B4;
+    color: #ffffff;
+  }
+  .mdl-classifier .mdListGrid.ag-theme-alpine {
+    --ag-border-color: #e0dede;
+    --ag-header-foreground-color: #3C59A7;
+    --ag-odd-row-background-color: #f8f9fd !important;
+    --ag-range-selection-border-style: none;
+  }
+  .mdl-classifier .mdListGrid .ag-header-cell-text {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* --------------------- Mdl ClassifierDetail ------------------------ */
+  .mdl-classifier-detail {
+    padding: 0 30px 30px 30px;
+    height: 100%;
+    min-width: 1125px;
+  }
+  .mdl-classifier-detail input::placeholder, .mdl-classifier-detail input, .mdl-classifier-detail .v-label {
+    font-size: 0.9rem;
+  }
+  .mdl-classifier-detail .top-tab .v-slide-group__content {
+    border-bottom: solid 1px #B8B8B8;
+    align-items: center;
+  }
+  .mdl-classifier-detail .top-tab .btn-gray {
+    background: #A19F9F;
+    color: #ffffff;
+  }
+  .mdl-classifier-detail .content-container {
+    padding-top: 20px;
+    padding-bottom: 50px;
+  }
+  .mdl-classifier-detail .v-card-item {
+    padding: 16px
+  }
+  .mdl-classifier-detail .subttl-card .v-card-item__content {
+    display: flex;
+    align-items: flex-end;
+  }
+  .mdl-classifier-detail .v-timeline--horizontal.v-timeline {
+    grid-column-gap: 0px;
+  }
+  .mdl-classifier-detail .tmln-ttl {
+    font-size: 1rem;
+  }
+  .mdl-classifier-detail .tmln-content-ttl {
+    /* max-width: 66px; */
+    width: max-content;
+    min-width: 45px;
+    margin-right: 10px;
+    font-size: 0.75rem;
+  }
+  .mdl-classifier-detail .tmln-content-val {
+    color:#747474;
+    width: max-content;
+    max-width: 129px;
+    font-size: 0.75rem;
+  }
+  .mdl-classifier-detail .v-timeline--horizontal.v-timeline .v-timeline-item:nth-child(2n+1) .v-timeline-item__body {
+    align-self: flex-start;
+  }
+  .mdl-classifier-detail .v-timeline--horizontal.v-timeline--align-center {
+    justify-items: flex-start;
+  }
+  .mdl-classifier-detail .v-timeline--horizontal.v-timeline--align-center .v-timeline-divider {
+    justify-content: flex-start;
+  }
+  .mdl-classifier-detail .v-timeline-item__opposite {
+    padding-bottom: 15px !important;
+    font-size: 1rem;
+    font-weight: 400;
+    padding-left: 0px !important;
+  }
+  .mdl-classifier-detail .v-field__input {
+    padding-top: 12px !important;
+    min-height: unset;
+    padding-bottom: 12px !important;
+  }
+  .mdl-classifier-detail .activated .v-timeline-divider__dot.v-timeline-divider__dot--size-small{
+    box-shadow: -3px 3px 3px rgb(186, 186, 186);
+  }
+  .mdl-classifier-detail .v-timeline-item:first-child .v-timeline-divider {
+    padding-left: 0px !important
+  }
+  .mdl-classifier-detail .v-timeline-item__body {
+    height: 137px;
+    margin-left: 13px;
+    padding-left: 15px !important;
+    padding-right: 0px !important;
+    padding-top: 10px !important;
+    border-left: solid 2px #B8B8B8;
+    margin-top: 5px;
+  }
+  .mdl-classifier-detail .activated .v-timeline-item__body {
+    border-left: solid 2px #3C59A7;
+    
+  }
+  .mdl-classifier-detail .v-timeline-divider {
+    margin-bottom: 10px;
+  }
+  .mdl-classifier-detail .v-timeline-item:not(.activated) {
+    color: #B8B8B8;
+  }
+  .mdl-classifier-detail .v-timeline--horizontal.v-timeline--justify-auto {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .mdl-classifier-detail .v-selection-control--dirty label {
+   opacity: 1;
+  }
+  .mdl-classifier-detail .card-text-subtitle {
+    border-bottom: 2px solid #3C59A7;
+    width: max-content;
+  }
+  .mdl-classifier-detail .grid-layout-1 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  /* --------------------- home ------------------------ */
+  .intro-1 {
+    background: url(@/assets/img/bg_home.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 663px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .intro-2 {
+    background: #FFFFFF;
+    height: 663px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+  .intro-2 .whiz-apollon-logo {
+    content: url(@/assets/img/ic_apollon_logo.png);
+  }
+  .intro-3 {
+    background: #286093;
+    height: 663px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 2;
+  }
+
+  #painterro {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 400px;
+  }
