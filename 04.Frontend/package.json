@@ -1,0 +1,48 @@
+{
+  "name": "whiz-apollon-frontend",
+  "version": "0.0.1",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "vite",
+    "build:local": "vite build",
+    "build:stg": "vite --mode stg build",
+    "build:dev": "vite --mode dev build",
+    "build:prod": "vite --mode prod build",
+    "preview": "vite preview --port 4173",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.2.96",
+    "axios": "^1.3.2",
+    "dayjs": "^1.11.7",
+    "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.21",
+    "painterro": "^1.2.78",
+    "pinia": "^2.0.30",
+    "pinia-plugin-persist": "^1.0.0",
+    "query-string": "^8.1.0",
+    "vue": "^3.2.47",
+    "vue-class-component": "^8.0.0-rc.1",
+    "vue-router": "^4.1.6",
+    "vue-select": "^4.0.0-beta.6",
+    "vue3-datepicker": "^0.3.4",
+    "vue3-timepicker": "^1.0.0-beta.2",
+    "vuetify": "^3.1.10"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@fortawesome/fontawesome-free": "^6.3.0",
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@vitejs/plugin-legacy": "^4.0.1",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.33.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.9.0",
+    "prettier": "^2.8.4",
+    "sass": "^1.59.3",
+    "terser": "^5.16.3",
+    "vite": "^4.1.1"
+  }
+}
