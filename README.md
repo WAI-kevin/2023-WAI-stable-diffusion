@@ -13,14 +13,15 @@
 ## 커밋 현황 (윤수민)
 |Team|날짜|변경사항(Commit Message)|
 |:---:|:---:|:---|
-|Prompt|2023.05.25|환경 목록 업로드|
-||2023.05.30|WAI_SD_Prompt_v0.5 업로드|
+|Prompt|2023.05.25|Requirements 리스트 작성|
+||2023.05.30|SD_Prompt.py 업로드|
 ||||||||
-|Modeling|2023.05.30|환경 목록 업로드|
-||2023.05.30|WAI_SD_Modeling_v0.5 업로드|
+|Modeling|2023.05.30|Requirements 리스트 작성|
+||2023.05.30|SD_Modeling.py 업로드|
 ||||||||
-|Backend|2023.05.30|환경 목록 업로드|
-||2023.05.30|WAI_SD_Backend_v0.5 업로드|
+|Backend|2023.05.30|Requirements 리스트 작성|
+||2023.05.30|SD_Backend_main.py 업로드|
+||2023.05.30|SD_Backend_model.py 업로드|
 ||||||||
-|Frontend|2023.05.30|환경 목록 업로드|
-||2023.05.30|WAI_SD_Frontend_v0.5 업로드|
+|Frontend|2023.05.30|Requirements 리스트 작성|
+||2023.05.30|SD_Frontend 폴더 업로드|
