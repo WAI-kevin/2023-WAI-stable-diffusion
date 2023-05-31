@@ -2,8 +2,8 @@
 =====
 [Stable Diffusion_WBS](https://docs.google.com/spreadsheets/d/1Kv0j0DuvL8gdNI38h110kOWvI5wmrC_Sv45lwh-WQ3g/edit?usp=sharing)
 ## Branch - Team
-- 각 팀 리더가 팀별 폴더에 작업 결과물 업로드 및 커밋
-- 팀 내 파트별 작업, 세부 작업, 테스트 파일 생성 등 기타 작업은 하위 폴더 '팀명_Backup' 활용
+- 각 팀 리더가 팀별 폴더 '팀명'에 작업 결과물 업로드 및 커밋
+- 팀 내부 파트별 작업, 세부 작업, 테스트 파일 생성 등 기타 작업은 하위 폴더 '팀명_Backup' 자유롭게 활용
 ---
 ### 01.Prompt (김은빈)
 ### 02.Modeling (서지원, 김범진)
