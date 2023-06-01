@@ -23,7 +23,7 @@ class Text_To_Image :
         accelerator = Accelerator()
         device = accelerator.device
 
-        model_id = "runwayml/stable-diffusion-v1-5"
+        model_id = "CompVis/stable-diffusion-v1-4"
         pipe = StableDiffusionPipeline.from_pretrained(
             model_id,
             revision = 'fp16', 
@@ -65,7 +65,7 @@ class Image_To_Image :
         accelerator = Accelerator()
         device = accelerator.device
         
-        model_id = "runwayml/stable-diffusion-v1-5"
+        model_id = "CompVis/stable-diffusion-v1-4"
         pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
             model_id,
             revision="fp16", 
@@ -158,21 +158,7 @@ class Image_Inpaint:
             num_images_per_prompt=1,
         ).images[0]
         
-        result_image.resize((image_width, image_height))
-                                                
-        print("prompt : ", prompt)    
-        print("seed : ", seed_no)
-        
-        result_path = os.getcwd() + "/result"
-        output_path = result_path + "/ImageInpaint"  
-        if not os.path.exists(result_path):
-            os.mkdir(result_path)
-        if not os.path.exists(output_path):
-            os.mkdir(output_path)
-            
-        prompt_udbar = prompt.replace(" ","_")            
-        result_image.save(output_path + f"/IIp_{prompt_udbar}_{seed_no}.png", "png")
-                                                
+        result_image.resize((image_width, image_height))                                      
         return result_image
 
 def line_logging(*messages):
