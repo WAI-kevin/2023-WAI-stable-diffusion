@@ -41,6 +41,7 @@
           'precise correct anatomy',
           'matte painting',
         ]"
+        v-model="this.lam"
         bg-color="rgba(166, 182, 226, 1)"
       ></v-autocomplete>
       <v-autocomplete
@@ -89,6 +90,7 @@
           'scientific',
           'comic',
         ]"
+        v-model="this.asam"
         bg-color="rgba(166, 182, 226, 1)"
       ></v-autocomplete>
       <v-autocomplete
@@ -139,6 +141,7 @@
           'overglaze',
           'analog photo',
         ]"
+        v-model="this.psaq"
         bg-color="rgba(166, 182, 226, 1)"
       ></v-autocomplete>
       <v-autocomplete
@@ -150,7 +153,9 @@
       ></v-autocomplete>
     </div>
     <div class="mb-15 text-right">
-      <v-btn rounded="xl" size="x-large" class="btn-style-2">RUN</v-btn>
+      <v-btn rounded="xl" size="x-large" class="btn-style-2" @click="runBtn"
+        >RUN</v-btn
+      >
     </div>
     <v-card>
       <v-card-text
@@ -161,57 +166,94 @@
           v-model="this.resultPrompt"
         ></v-textarea>
       </v-card-text>
-      <div id="painterro"></div
+      <div id="painterro" ref="painterro"></div
     ></v-card>
     <div class="d-flex pt-30 justify-content-space-between">
       <v-btn variant="flat" rounded="xl" class="btn-style-2">SHARE</v-btn>
       <v-btn variant="flat" rounded="xl" class="btn-style-2">RESET</v-btn>
     </div>
-    <!-- <v-btn @click="painterro.show()">편집 버튼</v-btn> -->
   </div>
 </template>
 <script>
 import Painterro from 'painterro';
+import axios from 'axios';
+
 export default {
+  setup() {
+    const baseURL = import.meta.env.VITE_API_ENDPOINT;
+    const api = axios.create({
+      baseURL,
+      timeout: 100000,
+    });
+    return {
+      api,
+    };
+  },
   data() {
     return {
       resultPrompt:
         'The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.',
       painterro: null,
       prompt: '',
-      inputImg: null,
+      lam: null,
+      asam: null,
+      psaq: null,
+      inputImg: [],
     };
   },
-  mounted() {},
-  methods: {
-    inputChng: function () {
-      if (this.painterro) {
-        console.log('durldurldjdjdjdjdj');
-        this.painterro = null;
-      }
+  mounted() {
+    this.$nextTick(() => {
       this.painterro = Painterro({
         id: 'painterro',
-        hiddenTools: ['arrow', 'text', 'close', 'bucket'],
-        backplateImgUrl: window.URL.createObjectURL(this.inputImg[0]),
+        hiddenTools: ['arrow', 'close', 'bucket', 'open', 'text'],
+        backplateImgUrl: '/src/assets/img/modify_default.png',
         colorScheme: {
           main: '#f8f8f8',
           control: '#d5d5d5',
           controlContent: '#434649',
         },
-        saveHandler: (image, done) => {
-          var a = document.createElement('a');
-          const file = image.asBlob();
-          const downloadUrl = window.URL.createObjectURL(file);
-          a.href = downloadUrl;
-          a.download = 'down';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          done(true);
+        saveHandler: async (image, done) => {
+          var formData = new FormData();
+          formData.append('in_files', this.inputImg[0]);
+          var file = new File([image.asBlob()], 'mask.png');
+          formData.append('in_files', file);
+          var modifyInput = {
+            prompt: this.prompt,
+            options: this.lam,
+            in_files: { ...formData },
+          };
+          // var result = await this.api.post('/Modify', formData, {
+          //   headers: {
+          //     'Content-Type': 'multipart/form-data',
+          //   },
+          // });
+
+          console.log(modifyInput);
+          console.log(typeof [formData]);
+          var result = await this.api.post('/Modify', modifyInput);
+
+          // var a = document.createElement('a');
+          // const file = image.asBlob();
+          // const downloadUrl = window.URL.createObjectURL(file);
+          // a.href = downloadUrl;
+          // a.download = 'down';
+          // document.body.appendChild(a);
+          // a.click();
+          // document.body.removeChild(a);
+
+          done(false);
         },
       });
       this.painterro.show();
+    });
+  },
+  methods: {
+    inputChng: function () {
+      var elements = document.getElementsByClassName('ptro-center-tablecell');
+      elements[0].style.backgroundImage =
+        "url('" + window.URL.createObjectURL(this.inputImg[0]) + "')";
     },
+    runBtn: function () {},
   },
 };
 </script>
