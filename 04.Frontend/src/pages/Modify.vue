@@ -7,40 +7,12 @@
       v-model="this.prompt"
       rows="4"
     ></v-textarea>
-    <v-file-input
-      label="Upload Image"
-      color="white"
-      bg-color="rgba(166, 182, 226, 1)"
-      ref="fileAdd"
-      v-model="this.inputImg"
-      @update:modelValue="inputChng()"
-    ></v-file-input>
     <div class="d-flex grid-gap-15 mb-20">
       <v-autocomplete
         hide-details
         color="white"
         label="lighting and mood"
-        :items="[
-          '35mm',
-          'sharp',
-          'low poly 3d render',
-          'golden hour',
-          'sunny sky',
-          'hyper realistic',
-          'epic scale',
-          'sense of awe',
-          'hypermaximalist',
-          'insane level of details',
-          'artstation HQ',
-          '80mm',
-          'photoshopped',
-          'insanely detailed',
-          'intricate',
-          'brush effect',
-          'macro',
-          'precise correct anatomy',
-          'matte painting',
-        ]"
+        :items="this.lamOpt"
         v-model="this.lam"
         bg-color="rgba(166, 182, 226, 1)"
       ></v-autocomplete>
@@ -48,48 +20,7 @@
         hide-details
         color="white"
         label="artistic style and mediums"
-        :items="[
-          'Pablo Picasso',
-          'Van Gogh',
-          'Da Vinci',
-          'Hokusai',
-          'Manga',
-          'fantasy',
-          'minimalism',
-          'abstract',
-          'graffiti',
-          'Digital art',
-          'digital painting',
-          'color page',
-          'featured on pixiv (for anime/manga)',
-          'trending on artstation',
-          'precise line-art',
-          'tarot card',
-          'character design',
-          'concept art',
-          'symmetry',
-          'golden ratio',
-          'evocative',
-          'award winning',
-          'shiny',
-          'smooth',
-          'surreal',
-          'divine',
-          'celestial',
-          'elegant',
-          'oil painting',
-          'soft',
-          'fascinating',
-          'fine art',
-          'Oil on canvas',
-          'watercolour',
-          'sketch',
-          'photography',
-          'Isometric',
-          'pixar',
-          'scientific',
-          'comic',
-        ]"
+        :items="this.asamOpt"
         v-model="this.asam"
         bg-color="rgba(166, 182, 226, 1)"
       ></v-autocomplete>
@@ -97,50 +28,7 @@
         hide-details
         color="white"
         label="picture style and quality"
-        :items="[
-          'ultra wide-angle',
-          'wide-angle',
-          'aerial view',
-          'massive scale',
-          'street level view',
-          'landscape',
-          'panoramic',
-          'bokeh',
-          'fisheye',
-          'dutch angle',
-          'low angle',
-          'extreme long-shot',
-          'long shot',
-          'close-up',
-          'extreme close-up',
-          'highly detailed',
-          '4k',
-          '8k uhd',
-          'studio quality',
-          'polaroid',
-          '100mm',
-          'film photography',
-          'dslr',
-          'cinema4d',
-          'movie concept arthighly detailed',
-          'grainy',
-          'unreal engine',
-          'octane render',
-          'vray',
-          'houdini render',
-          'quixel megascans',
-          'depth of field (or dof)',
-          'arnold render',
-          'raytracing',
-          'cgi',
-          'lumen reflections',
-          'cgsociety',
-          'realistic',
-          'ultra realistic',
-          'volumetric fog',
-          'overglaze',
-          'analog photo',
-        ]"
+        :items="this.psaqOpt"
         v-model="this.psaq"
         bg-color="rgba(166, 182, 226, 1)"
       ></v-autocomplete>
@@ -152,6 +40,14 @@
         bg-color="rgba(166, 182, 226, 1)"
       ></v-autocomplete>
     </div>
+    <v-file-input
+      label="Upload Image"
+      color="white"
+      bg-color="rgba(166, 182, 226, 1)"
+      v-model="this.inputImg"
+      @update:modelValue="inputChng()"
+    ></v-file-input>
+    <div id="painterro" ref="painterro" class="mb-20"></div>
     <div class="mb-15 text-right">
       <v-btn rounded="xl" size="x-large" class="btn-style-2" @click="runBtn"
         >RUN</v-btn
@@ -166,8 +62,13 @@
           v-model="this.resultPrompt"
         ></v-textarea>
       </v-card-text>
-      <div id="painterro" ref="painterro"></div
-    ></v-card>
+      <v-img
+        default
+        class="mb-30"
+        height="400px"
+        src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+      ></v-img>
+    </v-card>
     <div class="d-flex pt-30 justify-content-space-between">
       <v-btn variant="flat" rounded="xl" class="btn-style-2">SHARE</v-btn>
       <v-btn variant="flat" rounded="xl" class="btn-style-2">RESET</v-btn>
@@ -194,9 +95,116 @@ export default {
       resultPrompt:
         'The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.',
       painterro: null,
-      prompt: '',
+      prompt: null,
+      lamOpt: [
+        '35mm',
+        'sharp',
+        'low poly 3d render',
+        'golden hour',
+        'sunny sky',
+        'hyper realistic',
+        'epic scale',
+        'sense of awe',
+        'hypermaximalist',
+        'insane level of details',
+        'artstation HQ',
+        '80mm',
+        'photoshopped',
+        'insanely detailed',
+        'intricate',
+        'brush effect',
+        'macro',
+        'precise correct anatomy',
+        'matte painting',
+      ],
       lam: null,
+      asamOpt: [
+        'Pablo Picasso',
+        'Van Gogh',
+        'Da Vinci',
+        'Hokusai',
+        'Manga',
+        'fantasy',
+        'minimalism',
+        'abstract',
+        'graffiti',
+        'Digital art',
+        'digital painting',
+        'color page',
+        'featured on pixiv (for anime/manga)',
+        'trending on artstation',
+        'precise line-art',
+        'tarot card',
+        'character design',
+        'concept art',
+        'symmetry',
+        'golden ratio',
+        'evocative',
+        'award winning',
+        'shiny',
+        'smooth',
+        'surreal',
+        'divine',
+        'celestial',
+        'elegant',
+        'oil painting',
+        'soft',
+        'fascinating',
+        'fine art',
+        'Oil on canvas',
+        'watercolour',
+        'sketch',
+        'photography',
+        'Isometric',
+        'pixar',
+        'scientific',
+        'comic',
+      ],
       asam: null,
+      psaqOpt: [
+        'ultra wide-angle',
+        'wide-angle',
+        'aerial view',
+        'massive scale',
+        'street level view',
+        'landscape',
+        'panoramic',
+        'bokeh',
+        'fisheye',
+        'dutch angle',
+        'low angle',
+        'extreme long-shot',
+        'long shot',
+        'close-up',
+        'extreme close-up',
+        'highly detailed',
+        '4k',
+        '8k uhd',
+        'studio quality',
+        'polaroid',
+        '100mm',
+        'film photography',
+        'dslr',
+        'cinema4d',
+        'movie concept arthighly detailed',
+        'grainy',
+        'unreal engine',
+        'octane render',
+        'vray',
+        'houdini render',
+        'quixel megascans',
+        'depth of field (or dof)',
+        'arnold render',
+        'raytracing',
+        'cgi',
+        'lumen reflections',
+        'cgsociety',
+        'realistic',
+        'ultra realistic',
+        'volumetric fog',
+        'overglaze',
+        'analog photo',
+      ],
       psaq: null,
       inputImg: [],
     };
@@ -205,42 +213,28 @@ export default {
     this.$nextTick(() => {
       this.painterro = Painterro({
         id: 'painterro',
-        hiddenTools: ['arrow', 'close', 'bucket', 'open', 'text'],
+        hiddenTools: ['arrow', 'close', 'bucket', 'open', 'text', 'save'],
         backplateImgUrl: '/src/assets/img/modify_default.png',
-        colorScheme: {
-          main: '#f8f8f8',
-          control: '#d5d5d5',
-          controlContent: '#434649',
-        },
         saveHandler: async (image, done) => {
           var formData = new FormData();
           formData.append('in_files', this.inputImg[0]);
-          var file = new File([image.asBlob()], 'mask.png');
+          var file = new File([image.asBlob()], 'mask.png', {
+            type: 'image/png',
+          });
           formData.append('in_files', file);
-          var modifyInput = {
-            prompt: this.prompt,
-            options: this.lam,
-            in_files: { ...formData },
-          };
-          // var result = await this.api.post('/Modify', formData, {
-          //   headers: {
-          //     'Content-Type': 'multipart/form-data',
-          //   },
-          // });
+          formData.append('prompt', this.prompt);
+          formData.append('options', this.lam);
+          formData.append('options', this.asam);
+          formData.append('options', this.psaq);
 
-          console.log(modifyInput);
-          console.log(typeof [formData]);
-          var result = await this.api.post('/Modify', modifyInput);
-
-          // var a = document.createElement('a');
-          // const file = image.asBlob();
-          // const downloadUrl = window.URL.createObjectURL(file);
-          // a.href = downloadUrl;
-          // a.download = 'down';
-          // document.body.appendChild(a);
-          // a.click();
-          // document.body.removeChild(a);
-
+          var result = await this.api.post('/Modify', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+          if (result != 'success') {
+            console.log(result);
+          }
           done(false);
         },
       });
@@ -250,10 +244,33 @@ export default {
   methods: {
     inputChng: function () {
       var elements = document.getElementsByClassName('ptro-center-tablecell');
-      elements[0].style.backgroundImage =
-        "url('" + window.URL.createObjectURL(this.inputImg[0]) + "')";
+      if (this.inputImg[0] == null) {
+        elements[0].style.backgroundImage =
+          'url(/src/assets/img/modify_default.png)';
+      } else {
+        elements[0].style.backgroundImage =
+          "url('" + window.URL.createObjectURL(this.inputImg[0]) + "')";
+      }
     },
-    runBtn: function () {},
+    runBtn: function () {
+      if (this.prompt == null) {
+        console.log('프롬프트를 입력하세요');
+        return;
+      } else if (this.lam == null) {
+        console.log('lighting and mood를 입력하세요');
+        return;
+      } else if (this.asam == null) {
+        console.log('artistic style and mediums를 입력하세요');
+        return;
+      } else if (this.psaq == null) {
+        console.log('picture style and quality를 입력하세요');
+        return;
+      } else if (this.inputImg[0] == null) {
+        console.log('이미지를 입력하세요');
+        return;
+      }
+      this.painterro.save();
+    },
   },
 };
 </script>
