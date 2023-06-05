@@ -5,6 +5,8 @@
 ## 작성 자 : SILVERBEEN
 ## INPUT : RAW KOREAN TEXT
 ## OUTPUT : ENGLISH TEXT LIST (PROMPT)
+#### prompt rule
+#### 전체적인 작성 규칙 : 구분자를 , 로 (ex. 예쁜 고양이가 케이크를 먹는다., 케이크는 초코 케이크, 옆에는 사탕을 먹는 여자아이가 있다.)
 #######################################################
 #######################################################
 ## log 찍어주는 함수
@@ -26,52 +28,34 @@ def line_logging( *messages):
 def korean_cleaning (korean_text : str) -> str :
 
     line_logging("="*20," korean_cleaning Function START ","="*20)
+    # ".", "!", "?", "," 를 제외한 특수문자 제거 ('"#$%&\'()*+-/:;<=>@[\\]^_`{|}~')
+    remove_text = string.punctuation
+    remove_text = remove_text.replace(".", "").replace(",", "").replace("!", "").replace("?", "")
 
-    new_korean_text_00 = re.sub(pattern='([ㄱ-ㅎㅏ-ㅣ])+', repl=' ', string=korean_text)  # 자음,모음 제거
-    new_korean_text_00 = re.sub(pattern='\n', repl=' ', string=new_korean_text_00)  # \n 제거
-    new_korean_text_00 = re.sub(pattern='[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9\s\.\?!]', repl=' ',
-                                string=new_korean_text_00)  # 한글, 영문, 숫자, 구두점을 제외한 모든 문자를 제거하는 정규표현식
+    clean_korean_text_Consonants = re.sub(pattern='([ㄱ-ㅎㅏ-ㅣ])+', repl=' ', string=korean_text)  # 자음,모음 제거
+    clean_korean_text_enter = re.sub(pattern='\n', repl=' ', string=clean_korean_text_Consonants)  # \n 제거
+    clean_korean_text_url = re.sub(pattern='(http|ftp|https)://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', repl=' ', string=clean_korean_text_enter)  # URL 제거
+    new_korean_text_email = re.sub(pattern='([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)', repl=' ', string=clean_korean_text_url)  # E-mail제거
+    new_korean_text = ''.join([k for k in new_korean_text_email if k not in remove_text])
+    new_korean_text_count = new_korean_text.split(",")
+    
 
-    new_korean_text_00 = re.sub(pattern='(http|ftp|https)://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', repl=' ', string=new_korean_text_00)  # URL 제거
-    new_korean_text_00 = re.sub(pattern='([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)', repl=' ', string=new_korean_text_00)  # E-mail제거
-    new_korean_text_count = new_korean_text_00.split(" ")
-    new_korean_text_00 = new_korean_text_00.replace(" ", ". ")
-
-    #spacing = Spacing()
-    #kospacing_sent = spacing(new_korean_text_00)
-
-    if (len(new_korean_text_00)<=10) | (len(new_korean_text_count) <= 2) :
+    if (len(new_korean_text)<=10) | (len(new_korean_text_count) <= 2) :
         line_logging("[ Please write in more detail. ]")
     else :
         line_logging("="*20," korean_cleaning Function FINISH ","="*20)
-    return new_korean_text_00
+    return new_korean_text
 
 ## google translator API 함수
-## 명사 형태
-## NN(명사, 단수형), NNS(명사, 복수형), NNP(고유명사, 단수형), NNPS(고유명사, 복수형),
-## 동사 형태
-## VB(동사, 원형), VBD(동사, 과거형), VBG(동사, 현재분사), VBN(동사, 과거분사)
-## 형용사 형태
-## JJ(형용사), JJR(형용사, 비교급), JJS(형용사, 최상급)
-## 전치사
-## IN (전치사)
-## 부사
-## ADV (부사)
-import requests
-## pip install googletrans==3.1.0a0
+
 def translator_ko_en (new_korean_text : str,select_parts_of_speech : list)  -> list :
     line_logging("="*20," translator_ko_en Function START ","="*20)
     translator = Translator()
     result = translator.translate(new_korean_text, src='ko', dest='en')
-    english_text = result.text
-    print(new_korean_text)
-    print("="*20)
-    print(english_text)
-    tagged_list = pos_tag(word_tokenize(english_text))
-    final_english_text = [word[0] for word in tagged_list if word[1] in select_parts_of_speech]
+    english_text = result.text.split(",")
 
     line_logging("="*20," translator_ko_en Function FINISH ","="*20)
-    return final_english_text
+    return english_text
 
 
 ## c1 = ["35mm", "sharp", "low poly 3d render"] 과 같은 형태의 input일 경우
@@ -88,18 +72,14 @@ try :
     import re
     import sys
     import subprocess
+    import string
     from googletrans import Translator
-    import nltk
-    from nltk.tokenize import word_tokenize
-    from nltk.tag import pos_tag
-    from pykospacing import Spacing
 
-    text = "안녕하세,요. - d-wg- ㅎㅎㅎ 제   이름은 피곤한 은색콩입니다. 집 좀   보내주세요. 저 내일부터 회사    안나옵니다.^^ 메롱 바보. 안녕하세요. 메롱. 메롱."
+    text = "예쁜 고양이가 케이크를 먹는다., 케이크는 초코 케이크, 옆에는 사탕을 먹는 여자아이가 있다."
     c1 = ["35mm, sharp", "low poly 3d render"]
     c2 = ["Pablo Picasso", "Van Gogh", "Da Vinci"]
     c3 = ["ultra wide-angle", "wide-angle", "aerial view", "massive scale"]
 
-    select_parts_of_speech = ["NN", "NNS", "NNP", "NNPS", "VB", "VBD", "VBG", "VBN", "JJ", "JJR", "JJS", "ADV"]
     new_korean_text = korean_cleaning(text)
     prompt_text = translator_ko_en(new_korean_text, select_parts_of_speech)
     result_text = category_append(prompt_text, c1, c2, c3)
