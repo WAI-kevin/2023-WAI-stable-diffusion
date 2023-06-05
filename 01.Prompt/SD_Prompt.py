@@ -28,7 +28,7 @@ def line_logging( *messages):
 def korean_cleaning (korean_text : str) -> str :
 
     line_logging("="*20," korean_cleaning Function START ","="*20)
-    # ".", "!", "?", "," 를 제외한 특수문자 제거 ('"#$%&\'()*+-/:;<=>@[\\]^_`{|}~')
+    # ".", "!", "?", "," 를 제외한 특수문자 제거 ('"#$%&\'()*+-/:;<=>@[\\]^_`{|}~')를 위한 뭉텅이 생성
     remove_text = string.punctuation
     remove_text = remove_text.replace(".", "").replace(",", "").replace("!", "").replace("?", "")
 
@@ -36,7 +36,7 @@ def korean_cleaning (korean_text : str) -> str :
     clean_korean_text_enter = re.sub(pattern='\n', repl=' ', string=clean_korean_text_Consonants)  # \n 제거
     clean_korean_text_url = re.sub(pattern='(http|ftp|https)://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', repl=' ', string=clean_korean_text_enter)  # URL 제거
     new_korean_text_email = re.sub(pattern='([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)', repl=' ', string=clean_korean_text_url)  # E-mail제거
-    new_korean_text = ''.join([k for k in new_korean_text_email if k not in remove_text])
+    new_korean_text = ''.join([k for k in new_korean_text_email if k not in remove_text]) # '"#$%&\'()*+-/:;<=>@[\\]^_`{|}~' 제거
     new_korean_text_count = new_korean_text.split(",")
     
 
