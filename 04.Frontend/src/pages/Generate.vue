@@ -214,9 +214,9 @@ const runBtn = async () => {
 
   var formData = new FormData();
   formData.append('prompt', data.prompt);
-  formData.append('options', data.lam);
-  formData.append('options', data.asam);
-  formData.append('options', data.psaq);
+  formData.append('options1', data.lam);
+  formData.append('options2', data.asam);
+  formData.append('options3', data.psaq);
 
   var result = await api.post('/Generate', formData, {
     headers: {
