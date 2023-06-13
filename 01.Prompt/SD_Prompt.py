@@ -60,9 +60,13 @@ def translator_ko_en (new_korean_text : str,select_parts_of_speech : list)  -> l
 
 ## c1 = ["35mm", "sharp", "low poly 3d render"] 과 같은 형태의 input일 경우
 def category_append (prompt_text:"list", c1 : "list", c2 : "list", c3 : "list") -> list :
-    prompt_text.extend(c1)
-    prompt_text.extend(c2)
-    prompt_text.extend(c3)
+    c1_list = c1.split(",")
+    c2_list = c2.split(",")
+    c3_list = c3.split(",")
+
+    prompt_text.extend(c1_list)
+    prompt_text.extend(c2_list)
+    prompt_text.extend(c3_list)
     return prompt_text
 
 
