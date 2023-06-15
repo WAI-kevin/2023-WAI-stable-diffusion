@@ -3,6 +3,7 @@
     <v-textarea
       class="pt-30"
       label="Enter your prompt here"
+      :placeholder="this.ps"
       variant="solo"
       v-model="this.prompt"
       rows="4"
@@ -92,6 +93,7 @@ export default {
   },
   data() {
     return {
+      ps: '■ 작성 규칙 : 문장, 단어 상관없이 구분자를 "," 로 작성하기 \n    example 1. 예쁜 고양이가 케이크를 먹는다., 케이크는 초코 케이크, 옆에는 사탕을 먹는 여자아이가 있다., 꿈\n    example 2. 사무실, 여자, 3명, 안경을 낀, 마시다, 커피',
       resultPrompt:
         'The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.',
       painterro: null,

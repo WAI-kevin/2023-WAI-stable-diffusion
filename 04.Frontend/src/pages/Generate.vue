@@ -32,40 +32,39 @@
         :items="data.psaqOpt"
         v-model="data.psaq"
       ></v-autocomplete>
-      <v-autocomplete
-        hide-details
-        color="white"
-        bg-color="rgba(166, 182, 226, 1)"
-        label="Theme"
-        :items="['Theme1', 'Theme2', 'Theme3']"
-      ></v-autocomplete>
     </div>
     <div class="mb-15 text-right">
       <v-btn rounded="xl" size="x-large" class="btn-style-2" @click="runBtn"
         >RUN</v-btn
       >
     </div>
-    <v-card>
-      <v-card-text
-        ><v-textarea
-          label="Your Prompt"
-          variant="underlined"
-          readonly
-          v-model="resultPrompt"
-        ></v-textarea>
-      </v-card-text>
+
+    <div class="font-weight-500 font-20 pb-10">{{ data.modeledPrompt }}</div>
+    <v-card height="500px" class="d-flex ai-c justify-content-center">
       <v-img
+        v-show="!data.isModel"
         default
-        class="mb-30 resultImg"
-        height="400px"
-        src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-      ></v-img
-    ></v-card>
+        class="modeledImg"
+        style="height: 32px; width: 32px"
+        src="/src/assets/img/default_img.png"
+      ></v-img>
+      <div v-show="data.isModel" style="width: 150px">
+        <div class="font-weight-500 font-13 pb-10">Modeling Your Image...</div>
+        <v-progress-linear
+          color="deep-purple-accent-4"
+          indeterminate
+          rounded
+          height="6"
+        ></v-progress-linear>
+      </div>
+    </v-card>
     <div class="d-flex pt-30 justify-content-space-between">
       <v-btn variant="flat" rounded="xl" class="btn-style-2" @click="fnShareBtn"
         >SHARE</v-btn
       >
-      <v-btn variant="flat" rounded="xl" class="btn-style-2">RESET</v-btn>
+      <v-btn variant="flat" rounded="xl" class="btn-style-2" @click="fnResetBtn"
+        >RESET</v-btn
+      >
     </div>
   </div>
 </template>
@@ -79,12 +78,7 @@ const api = axios.create({
   timeout: 100000,
 });
 
-const fnShareBtn = async () => {
-  //
-};
-
 const data = reactive({
-  imgSrc: 'https://cdn.vuetifyjs.com/images/parallax/material.jpg',
   prompt: '',
   lamOpt: [
     '35mm',
@@ -196,7 +190,32 @@ const data = reactive({
     'analog photo',
   ],
   psaq: null,
+  modeledImg: null,
+  modeledPrompt: null,
+  isModel: false,
 });
+
+const fnShareBtn = async () => {
+  if (data.modeledImg) {
+    var a = document.createElement('a');
+    a.href = 'data:image/png;base64,' + data.modeledImg;
+    a.download = 'down';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+};
+
+const fnResetBtn = async () => {
+  data.isModel = false;
+  data.prompt = '';
+  data.lam = null;
+  data.asam = null;
+  data.psaq = null;
+  data.modeledImg = null;
+  data.modeledPrompt = null;
+  data.modeledImg = null;
+};
 
 const runBtn = async () => {
   if (data.prompt == null) {
@@ -218,42 +237,26 @@ const runBtn = async () => {
   formData.append('options1', data.lam);
   formData.append('options2', data.asam);
   formData.append('options3', data.psaq);
+  data.isModel = true;
+  var result = await api
+    .post('/Generate', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then(result => {
+      data.isModel = false;
+      return result;
+    });
+  data.modeledPrompt = result.data['txt'];
+  data.modeledImg = result.data['img'];
 
-  var result = await api.post('/Generate', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-    // responseType: 'blob',
-  });
-
-  // var arrayBuffer = result.data;
-  // var bytes = new Uint8Array(arrayBuffer);
-
-  // var image = document.getElementsByClassName('v-img__img v-img__img--contain');
-  // image[0].src = 'data:image/png;base64,' + encode(bytes);
-  //{ type: 'image/png' }
-  // let blob = new Blob([result]);
-  // let image = window.URL.createObjectURL(result.data);
-  // data.imgSrc = image;
-
-  // var elements = document.getElementsByClassName(
-  // 'v-img__img v-img__img--contain',
-  // );
-  // elements[0].src = image;
-  // elements[0].src = 'data:image/png;base64,' + base64ImageString;
-
-  // var blobURL = URL.createObjectURL(blob);
-  // var bs64 = Base64.encode(blob);
-  // var image = document.getElementsByClassName('v-img__img v-img__img--contain');
-  // image.onload = function () {
-  //   URL.revokeObjectURL(this.src); // release the blob URL once the image is loaded
-  // };
-  // image[0].src = blobURL;
-
-  console.log(result.data['Wayne img']);
-  // console.log(blob);
+  var elements1 = document.getElementsByClassName('modeledImg');
+  elements1[0].style.height = '360px';
+  elements1[0].style.width = 'unset';
+  var elements2 = document.getElementsByClassName(
+    'v-img__img v-img__img--contain',
+  );
+  elements2[0].src = 'data:image/png;base64,' + result.data['img'];
 };
-
-const resultPrompt =
-  'The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.';
 </script>
