@@ -56,133 +56,6 @@
   justify-content: center;
   font-size: 1.5rem;
 }
-/* --------------------- Mdl Classifier ------------------------ */
-.mdl-classifier {
-    padding: 0 30px 30px 30px;
-    height: 100%;
-  }
-  .mdl-classifier .v-card-item {
-    padding: 16px;
-    background: #5B73B4;
-    color: #ffffff;
-  }
-  .mdl-classifier .mdListGrid.ag-theme-alpine {
-    --ag-border-color: #e0dede;
-    --ag-header-foreground-color: #3C59A7;
-    --ag-odd-row-background-color: #f8f9fd !important;
-    --ag-range-selection-border-style: none;
-  }
-  .mdl-classifier .mdListGrid .ag-header-cell-text {
-    font-size: 13px;
-    font-weight: 500;
-  }
-
-  /* --------------------- Mdl ClassifierDetail ------------------------ */
-  .mdl-classifier-detail {
-    padding: 0 30px 30px 30px;
-    height: 100%;
-    min-width: 1125px;
-  }
-  .mdl-classifier-detail input::placeholder, .mdl-classifier-detail input, .mdl-classifier-detail .v-label {
-    font-size: 0.9rem;
-  }
-  .mdl-classifier-detail .top-tab .v-slide-group__content {
-    border-bottom: solid 1px #B8B8B8;
-    align-items: center;
-  }
-  .mdl-classifier-detail .top-tab .btn-gray {
-    background: #A19F9F;
-    color: #ffffff;
-  }
-  .mdl-classifier-detail .content-container {
-    padding-top: 20px;
-    padding-bottom: 50px;
-  }
-  .mdl-classifier-detail .v-card-item {
-    padding: 16px
-  }
-  .mdl-classifier-detail .subttl-card .v-card-item__content {
-    display: flex;
-    align-items: flex-end;
-  }
-  .mdl-classifier-detail .v-timeline--horizontal.v-timeline {
-    grid-column-gap: 0px;
-  }
-  .mdl-classifier-detail .tmln-ttl {
-    font-size: 1rem;
-  }
-  .mdl-classifier-detail .tmln-content-ttl {
-    /* max-width: 66px; */
-    width: max-content;
-    min-width: 45px;
-    margin-right: 10px;
-    font-size: 0.75rem;
-  }
-  .mdl-classifier-detail .tmln-content-val {
-    color:#747474;
-    width: max-content;
-    max-width: 129px;
-    font-size: 0.75rem;
-  }
-  .mdl-classifier-detail .v-timeline--horizontal.v-timeline .v-timeline-item:nth-child(2n+1) .v-timeline-item__body {
-    align-self: flex-start;
-  }
-  .mdl-classifier-detail .v-timeline--horizontal.v-timeline--align-center {
-    justify-items: flex-start;
-  }
-  .mdl-classifier-detail .v-timeline--horizontal.v-timeline--align-center .v-timeline-divider {
-    justify-content: flex-start;
-  }
-  .mdl-classifier-detail .v-timeline-item__opposite {
-    padding-bottom: 15px !important;
-    font-size: 1rem;
-    font-weight: 400;
-    padding-left: 0px !important;
-  }
-  .mdl-classifier-detail .v-field__input {
-    padding-top: 12px !important;
-    min-height: unset;
-    padding-bottom: 12px !important;
-  }
-  .mdl-classifier-detail .activated .v-timeline-divider__dot.v-timeline-divider__dot--size-small{
-    box-shadow: -3px 3px 3px rgb(186, 186, 186);
-  }
-  .mdl-classifier-detail .v-timeline-item:first-child .v-timeline-divider {
-    padding-left: 0px !important
-  }
-  .mdl-classifier-detail .v-timeline-item__body {
-    height: 137px;
-    margin-left: 13px;
-    padding-left: 15px !important;
-    padding-right: 0px !important;
-    padding-top: 10px !important;
-    border-left: solid 2px #B8B8B8;
-    margin-top: 5px;
-  }
-  .mdl-classifier-detail .activated .v-timeline-item__body {
-    border-left: solid 2px #3C59A7;
-    
-  }
-  .mdl-classifier-detail .v-timeline-divider {
-    margin-bottom: 10px;
-  }
-  .mdl-classifier-detail .v-timeline-item:not(.activated) {
-    color: #B8B8B8;
-  }
-  .mdl-classifier-detail .v-timeline--horizontal.v-timeline--justify-auto {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .mdl-classifier-detail .v-selection-control--dirty label {
-   opacity: 1;
-  }
-  .mdl-classifier-detail .card-text-subtitle {
-    border-bottom: 2px solid #3C59A7;
-    width: max-content;
-  }
-  .mdl-classifier-detail .grid-layout-1 {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-  }
 
   /* --------------------- home ------------------------ */
   .intro-1 {
@@ -224,3 +97,7 @@
     width: 100%;
     height: 400px;
   }
+
+  /* .resultImg {
+    content: url('https://cdn.vuetifyjs.com/images/parallax/material.jpg');
+  } */

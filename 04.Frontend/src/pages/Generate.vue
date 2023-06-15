@@ -56,7 +56,7 @@
       </v-card-text>
       <v-img
         default
-        class="mb-30"
+        class="mb-30 resultImg"
         height="400px"
         src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
       ></v-img
@@ -84,6 +84,7 @@ const fnShareBtn = async () => {
 };
 
 const data = reactive({
+  imgSrc: 'https://cdn.vuetifyjs.com/images/parallax/material.jpg',
   prompt: '',
   lamOpt: [
     '35mm',
@@ -222,10 +223,35 @@ const runBtn = async () => {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
+    // responseType: 'blob',
   });
-  if (result != 'success') {
-    console.log(result);
-  }
+
+  // var arrayBuffer = result.data;
+  // var bytes = new Uint8Array(arrayBuffer);
+
+  // var image = document.getElementsByClassName('v-img__img v-img__img--contain');
+  // image[0].src = 'data:image/png;base64,' + encode(bytes);
+  //{ type: 'image/png' }
+  // let blob = new Blob([result]);
+  // let image = window.URL.createObjectURL(result.data);
+  // data.imgSrc = image;
+
+  // var elements = document.getElementsByClassName(
+  // 'v-img__img v-img__img--contain',
+  // );
+  // elements[0].src = image;
+  // elements[0].src = 'data:image/png;base64,' + base64ImageString;
+
+  // var blobURL = URL.createObjectURL(blob);
+  // var bs64 = Base64.encode(blob);
+  // var image = document.getElementsByClassName('v-img__img v-img__img--contain');
+  // image.onload = function () {
+  //   URL.revokeObjectURL(this.src); // release the blob URL once the image is loaded
+  // };
+  // image[0].src = blobURL;
+
+  console.log(result.data['Wayne img']);
+  // console.log(blob);
 };
 
 const resultPrompt =
