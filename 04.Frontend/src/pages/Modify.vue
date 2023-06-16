@@ -8,37 +8,30 @@
       v-model="this.prompt"
       rows="4"
     ></v-textarea>
-    <div class="d-flex grid-gap-15 mb-20">
+    <div class="d-flex grid-gap-15 mb-15">
       <v-autocomplete
         hide-details
         color="white"
+        bg-color="rgba(166, 182, 226, 1)"
         label="lighting and mood"
         :items="this.lamOpt"
         v-model="this.lam"
-        bg-color="rgba(166, 182, 226, 1)"
       ></v-autocomplete>
       <v-autocomplete
         hide-details
         color="white"
+        bg-color="rgba(166, 182, 226, 1)"
         label="artistic style and mediums"
         :items="this.asamOpt"
         v-model="this.asam"
-        bg-color="rgba(166, 182, 226, 1)"
       ></v-autocomplete>
       <v-autocomplete
-        hide-details
         color="white"
+        hide-details
+        bg-color="rgba(166, 182, 226, 1)"
         label="picture style and quality"
         :items="this.psaqOpt"
         v-model="this.psaq"
-        bg-color="rgba(166, 182, 226, 1)"
-      ></v-autocomplete>
-      <v-autocomplete
-        hide-details
-        color="white"
-        label="Theme"
-        :items="['Theme1', 'Theme2', 'Theme3']"
-        bg-color="rgba(166, 182, 226, 1)"
       ></v-autocomplete>
     </div>
     <v-file-input
@@ -54,31 +47,41 @@
         >RUN</v-btn
       >
     </div>
-    <v-card>
-      <v-card-text
-        ><v-textarea
-          label="Your Prompt"
-          variant="underlined"
-          readonly
-          v-model="this.resultPrompt"
-        ></v-textarea>
-      </v-card-text>
+    <div class="font-weight-500 font-20 pb-10">{{ this.modeledPrompt }}</div>
+    <v-card height="500px" class="d-flex ai-c justify-content-center">
       <v-img
         default
-        class="mb-30"
-        height="400px"
-        src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+        class="modeledImg"
+        style="height: 32px; width: 32px"
+        src="/src/assets/img/default_img.png"
       ></v-img>
+      <div
+        v-show="this.isModel"
+        style="width: 150px; background: white; position: absolute"
+      >
+        <div class="font-weight-500 font-13 pb-10">Modeling Your Image...</div>
+        <v-progress-linear
+          color="deep-purple-accent-4"
+          indeterminate
+          rounded
+          height="6"
+        ></v-progress-linear>
+      </div>
     </v-card>
     <div class="d-flex pt-30 justify-content-space-between">
-      <v-btn variant="flat" rounded="xl" class="btn-style-2">SHARE</v-btn>
-      <v-btn variant="flat" rounded="xl" class="btn-style-2">RESET</v-btn>
+      <v-btn variant="flat" rounded="xl" class="btn-style-2" @click="fnShareBtn"
+        >SHARE</v-btn
+      >
+      <v-btn variant="flat" rounded="xl" class="btn-style-2" @click="fnResetBtn"
+        >RESET</v-btn
+      >
     </div>
   </div>
 </template>
 <script>
 import Painterro from 'painterro';
 import axios from 'axios';
+import { reactive, nextTick } from 'vue';
 
 export default {
   setup() {
@@ -94,10 +97,9 @@ export default {
   data() {
     return {
       ps: '■ 작성 규칙 : 문장, 단어 상관없이 구분자를 "," 로 작성하기 \n    example 1. 예쁜 고양이가 케이크를 먹는다., 케이크는 초코 케이크, 옆에는 사탕을 먹는 여자아이가 있다., 꿈\n    example 2. 사무실, 여자, 3명, 안경을 낀, 마시다, 커피',
-      resultPrompt:
-        'The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.',
       painterro: null,
-      prompt: null,
+      inputImg: [],
+      prompt: '',
       lamOpt: [
         '35mm',
         'sharp',
@@ -208,7 +210,9 @@ export default {
         'analog photo',
       ],
       psaq: null,
-      inputImg: [],
+      modeledImg: null,
+      modeledPrompt: null,
+      isModel: false,
     };
   },
   mounted() {
@@ -225,18 +229,33 @@ export default {
           });
           formData.append('in_files', file);
           formData.append('prompt', this.prompt);
-          formData.append('options', this.lam);
-          formData.append('options', this.asam);
-          formData.append('options', this.psaq);
+          formData.append('options1', this.lam);
+          formData.append('options2', this.asam);
+          formData.append('options3', this.psaq);
+
+          this.isModel = true;
 
           var result = await this.api.post('/Modify', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
           });
-          if (result != 'success') {
-            console.log(result);
-          }
+
+          this.isModel = false;
+          this.modeledPrompt = result.data['txt'];
+          this.modeledImg = result.data['img'];
+
+          // var elements2 = document.getElementsByClassName(
+          //   'v-img__img v-img__img--contain',
+          // );
+          // elements2[0].src = 'data:image/png;base64,' + result.data['img'];
+
+          // await nextTick(() => {
+          //   var elements1 = document.getElementsByClassName('modeledImg');
+          //   elements1[0].style.height = '360px';
+          //   elements1[0].style.width = 'unset';
+          // });
+
           done(false);
         },
       });
@@ -272,6 +291,35 @@ export default {
         return;
       }
       this.painterro.save();
+    },
+    fnShareBtn: async function () {
+      if (this.modeledImg) {
+        var a = document.createElement('a');
+        a.href = 'data:image/png;base64,' + this.modeledImg;
+        a.download = 'down';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    },
+    fnResetBtn: async function () {
+      this.isModel = false;
+      this.prompt = '';
+      this.lam = null;
+      this.asam = null;
+      this.psaq = null;
+      this.modeledImg = null;
+      this.modeledPrompt = null;
+      this.modeledImg = null;
+      var elements2 = document.getElementsByClassName(
+        'v-img__img v-img__img--contain',
+      );
+      elements2[0].src = '/src/assets/img/default_img.png';
+      await this.$nexttick(() => {
+        var elements1 = document.getElementsByClassName('modeledImg');
+        elements1[0].style.height = '32px';
+        elements1[0].style.width = '32px';
+      });
     },
   },
 };
