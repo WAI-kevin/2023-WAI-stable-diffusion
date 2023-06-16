@@ -7,12 +7,12 @@
       v-model="data.prompt"
       rows="4"
     ></v-textarea>
-    <div class="d-flex grid-gap-15 mb-20">
+    <div class="d-flex grid-gap-15 mb-15">
       <v-autocomplete
         hide-details
         color="white"
-        label="lighting and mood"
         bg-color="rgba(166, 182, 226, 1)"
+        label="lighting and mood"
         :items="data.lamOpt"
         v-model="data.lam"
       ></v-autocomplete>
@@ -25,19 +25,12 @@
         v-model="data.asam"
       ></v-autocomplete>
       <v-autocomplete
-        hide-details
         color="white"
+        hide-details
         bg-color="rgba(166, 182, 226, 1)"
         label="picture style and quality"
         :items="data.psaqOpt"
         v-model="data.psaq"
-      ></v-autocomplete>
-      <v-autocomplete
-        hide-details
-        color="white"
-        bg-color="rgba(166, 182, 226, 1)"
-        label="Theme"
-        :items="['Theme1', 'Theme2', 'Theme3']"
       ></v-autocomplete>
     </div>
     <v-file-input
@@ -51,42 +44,46 @@
         >RUN</v-btn
       >
     </div>
-    <v-card>
-      <v-card-text
-        ><v-textarea
-          label="Your Prompt"
-          variant="underlined"
-          readonly
-          v-model="resultPrompt"
-        ></v-textarea>
-      </v-card-text>
+    <div class="font-weight-500 font-20 pb-10">{{ data.modeledPrompt }}</div>
+    <v-card height="500px" class="d-flex ai-c justify-content-center">
       <v-img
         default
-        class="mb-30"
-        height="400px"
-        src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-      ></v-img
-    ></v-card>
+        class="modeledImg"
+        style="height: 32px; width: 32px"
+        src="/src/assets/img/default_img.png"
+      ></v-img>
+      <div
+        v-show="data.isModel"
+        style="width: 150px; background: white; position: absolute"
+      >
+        <div class="font-weight-500 font-13 pb-10">Modeling Your Image...</div>
+        <v-progress-linear
+          color="deep-purple-accent-4"
+          indeterminate
+          rounded
+          height="6"
+        ></v-progress-linear>
+      </div>
+    </v-card>
     <div class="d-flex pt-30 justify-content-space-between">
       <v-btn variant="flat" rounded="xl" class="btn-style-2" @click="fnShareBtn"
         >SHARE</v-btn
       >
-      <v-btn variant="flat" rounded="xl" class="btn-style-2">RESET</v-btn>
+      <v-btn variant="flat" rounded="xl" class="btn-style-2" @click="fnResetBtn"
+        >RESET</v-btn
+      >
     </div>
   </div>
 </template>
 <script setup>
 import axios from 'axios';
-import { reactive } from 'vue';
+import { reactive, nextTick } from 'vue';
 
 const baseURL = import.meta.env.VITE_API_ENDPOINT;
 const api = axios.create({
   baseURL,
   timeout: 100000,
 });
-
-const resultPrompt =
-  'The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.';
 
 const data = reactive({
   inputImg: [],
@@ -201,10 +198,40 @@ const data = reactive({
     'analog photo',
   ],
   psaq: null,
+  modeledImg: null,
+  modeledPrompt: null,
+  isModel: false,
 });
 
 const fnShareBtn = async () => {
-  //
+  if (data.modeledImg) {
+    var a = document.createElement('a');
+    a.href = 'data:image/png;base64,' + data.modeledImg;
+    a.download = 'down';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+};
+
+const fnResetBtn = async () => {
+  data.isModel = false;
+  data.prompt = '';
+  data.lam = null;
+  data.asam = null;
+  data.psaq = null;
+  data.modeledImg = null;
+  data.modeledPrompt = null;
+  data.modeledImg = null;
+  var elements2 = document.getElementsByClassName(
+    'v-img__img v-img__img--contain',
+  );
+  elements2[0].src = '/src/assets/img/default_img.png';
+  await nextTick(() => {
+    var elements1 = document.getElementsByClassName('modeledImg');
+    elements1[0].style.height = '32px';
+    elements1[0].style.width = '32px';
+  });
 };
 
 const runBtn = async () => {
@@ -228,17 +255,31 @@ const runBtn = async () => {
   var formData = new FormData();
   formData.append('in_files', data.inputImg[0]);
   formData.append('prompt', data.prompt);
-  formData.append('options', data.lam);
-  formData.append('options', data.asam);
-  formData.append('options', data.psaq);
+  formData.append('options1', data.lam);
+  formData.append('options2', data.asam);
+  formData.append('options3', data.psaq);
+
+  data.isModel = true;
 
   var result = await api.post('/Refine', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
-  if (result != 'success') {
-    console.log(result);
-  }
+
+  data.isModel = false;
+  data.modeledPrompt = result.data['txt'];
+  data.modeledImg = result.data['img'];
+
+  // var elements2 = document.getElementsByClassName(
+  //   'v-img__img v-img__img--contain',
+  // );
+  // elements2[0].src = 'data:image/png;base64,' + result.data['img'];
+
+  // await nextTick(() => {
+  //   var elements1 = document.getElementsByClassName('modeledImg');
+  //   elements1[0].style.height = '360px';
+  //   elements1[0].style.width = 'unset';
+  // });
 };
 </script>

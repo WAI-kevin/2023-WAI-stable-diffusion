@@ -38,7 +38,6 @@
         >RUN</v-btn
       >
     </div>
-
     <div class="font-weight-500 font-20 pb-10">{{ data.modeledPrompt }}</div>
     <v-card height="500px" class="d-flex ai-c justify-content-center">
       <v-img
@@ -195,7 +194,6 @@ const data = reactive({
   modeledImg: null,
   modeledPrompt: null,
   isModel: false,
-  isRest: true,
 });
 
 const fnShareBtn = async () => {
