@@ -296,7 +296,7 @@ export default {
       if (this.modeledImg) {
         var a = document.createElement('a');
         a.href = 'data:image/png;base64,' + this.modeledImg;
-        a.download = 'down';
+        a.download = 'WAI_StableDiffusion_MODIFY.png';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);

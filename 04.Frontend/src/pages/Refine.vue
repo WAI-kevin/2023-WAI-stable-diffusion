@@ -207,7 +207,7 @@ const fnShareBtn = async () => {
   if (data.modeledImg) {
     var a = document.createElement('a');
     a.href = 'data:image/png;base64,' + data.modeledImg;
-    a.download = 'down';
+    a.download = 'WAI_StableDiffusion_REFINE.png';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
