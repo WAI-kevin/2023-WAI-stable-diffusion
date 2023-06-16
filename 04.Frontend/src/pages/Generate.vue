@@ -42,13 +42,15 @@
     <div class="font-weight-500 font-20 pb-10">{{ data.modeledPrompt }}</div>
     <v-card height="500px" class="d-flex ai-c justify-content-center">
       <v-img
-        v-show="!data.isModel"
         default
         class="modeledImg"
         style="height: 32px; width: 32px"
         src="/src/assets/img/default_img.png"
       ></v-img>
-      <div v-show="data.isModel" style="width: 150px">
+      <div
+        v-show="data.isModel"
+        style="width: 150px; background: white; position: absolute"
+      >
         <div class="font-weight-500 font-13 pb-10">Modeling Your Image...</div>
         <v-progress-linear
           color="deep-purple-accent-4"
@@ -70,7 +72,7 @@
 </template>
 <script setup>
 import axios from 'axios';
-import { reactive } from 'vue';
+import { reactive, nextTick } from 'vue';
 
 const baseURL = import.meta.env.VITE_API_ENDPOINT;
 const api = axios.create({
@@ -193,6 +195,7 @@ const data = reactive({
   modeledImg: null,
   modeledPrompt: null,
   isModel: false,
+  isRest: true,
 });
 
 const fnShareBtn = async () => {
@@ -215,6 +218,15 @@ const fnResetBtn = async () => {
   data.modeledImg = null;
   data.modeledPrompt = null;
   data.modeledImg = null;
+  var elements2 = document.getElementsByClassName(
+    'v-img__img v-img__img--contain',
+  );
+  elements2[0].src = '/src/assets/img/default_img.png';
+  await nextTick(() => {
+    var elements1 = document.getElementsByClassName('modeledImg');
+    elements1[0].style.height = '32px';
+    elements1[0].style.width = '32px';
+  });
 };
 
 const runBtn = async () => {
@@ -237,26 +249,28 @@ const runBtn = async () => {
   formData.append('options1', data.lam);
   formData.append('options2', data.asam);
   formData.append('options3', data.psaq);
+
   data.isModel = true;
-  var result = await api
-    .post('/Generate', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    .then(result => {
-      data.isModel = false;
-      return result;
-    });
+
+  var result = await api.post('/Generate', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  data.isModel = false;
   data.modeledPrompt = result.data['txt'];
   data.modeledImg = result.data['img'];
 
-  var elements1 = document.getElementsByClassName('modeledImg');
-  elements1[0].style.height = '360px';
-  elements1[0].style.width = 'unset';
   var elements2 = document.getElementsByClassName(
     'v-img__img v-img__img--contain',
   );
   elements2[0].src = 'data:image/png;base64,' + result.data['img'];
+
+  await nextTick(() => {
+    var elements1 = document.getElementsByClassName('modeledImg');
+    elements1[0].style.height = '360px';
+    elements1[0].style.width = 'unset';
+  });
 };
 </script>
