@@ -7,6 +7,7 @@
       variant="solo"
       v-model="this.prompt"
       rows="4"
+      focused
     ></v-textarea>
     <div class="d-flex grid-gap-15 mb-15">
       <v-autocomplete
