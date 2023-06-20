@@ -1,5 +1,20 @@
 <template>
   <div>
+    <v-snackbar
+      v-model="this.isAlert"
+      multi-line
+      elevation="24"
+      color="deep-purple-accent-4"
+      location="top"
+      timeout="2000"
+    >
+      {{ this.alertMsg }}
+      <template v-slot:actions>
+        <v-btn color="white" variant="text" @click="this.isAlert = false">
+          X
+        </v-btn>
+      </template>
+    </v-snackbar>
     <v-textarea
       class="pt-30"
       label="Enter your prompt here"
@@ -97,10 +112,12 @@ export default {
   },
   data() {
     return {
+      isAlert: false,
+      alertMsg: null,
       ps: '■ 작성 규칙 : 문장, 단어 상관없이 구분자를 "," 로 작성하기 \n    example 1. 예쁜 고양이가 케이크를 먹는다., 케이크는 초코 케이크, 옆에는 사탕을 먹는 여자아이가 있다., 꿈\n    example 2. 사무실, 여자, 3명, 안경을 낀, 마시다, 커피',
       painterro: null,
       inputImg: [],
-      prompt: '',
+      prompt: null,
       lamOpt: [
         '35mm',
         'sharp',
@@ -276,19 +293,24 @@ export default {
     },
     runBtn: function () {
       if (this.prompt == null) {
-        console.log('프롬프트를 입력하세요');
+        this.isAlert = true;
+        this.alertMsg = '프롬프트를 입력하세요!';
         return;
       } else if (this.lam == null) {
-        console.log('lighting and mood를 입력하세요');
+        this.isAlert = true;
+        this.alertMsg = 'lighting and mood를 선택하세요!';
         return;
       } else if (this.asam == null) {
-        console.log('artistic style and mediums를 입력하세요');
+        this.isAlert = true;
+        this.alertMsg = 'artistic style and mediums를 선택하세요!';
         return;
       } else if (this.psaq == null) {
-        console.log('picture style and quality를 입력하세요');
+        this.isAlert = true;
+        this.alertMsg = 'picture style and quality를 선택하세요!';
         return;
       } else if (this.inputImg[0] == null) {
-        console.log('이미지를 입력하세요');
+        this.isAlert = true;
+        this.alertMsg = '이미지를 업로드하세요!';
         return;
       }
       this.painterro.save();

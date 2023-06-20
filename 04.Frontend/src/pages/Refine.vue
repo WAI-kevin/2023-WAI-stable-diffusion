@@ -1,5 +1,20 @@
 <template>
   <div>
+    <v-snackbar
+      v-model="data.isAlert"
+      multi-line
+      elevation="24"
+      color="deep-purple-accent-4"
+      location="top"
+      timeout="2000"
+    >
+      {{ data.alertMsg }}
+      <template v-slot:actions>
+        <v-btn color="white" variant="text" @click="data.isAlert = false">
+          X
+        </v-btn>
+      </template>
+    </v-snackbar>
     <v-textarea
       class="pt-30"
       label="Enter your prompt here"
@@ -88,9 +103,11 @@ const api = axios.create({
 });
 
 const data = reactive({
+  isAlert: false,
+  alertMsg: null,
   inputImg: [],
   ps: '■ 작성 규칙 : 문장, 단어 상관없이 구분자를 "," 로 작성하기 \n    example 1. 예쁜 고양이가 케이크를 먹는다., 케이크는 초코 케이크, 옆에는 사탕을 먹는 여자아이가 있다., 꿈\n    example 2. 사무실, 여자, 3명, 안경을 낀, 마시다, 커피',
-  prompt: '',
+  prompt: null,
   lamOpt: [
     '35mm',
     'sharp',
@@ -239,19 +256,24 @@ const fnResetBtn = async () => {
 
 const runBtn = async () => {
   if (data.prompt == null) {
-    console.log('프롬프트를 입력하세요');
+    data.isAlert = true;
+    data.alertMsg = '프롬프트를 입력하세요!';
     return;
   } else if (data.lam == null) {
-    console.log('lighting and mood를 입력하세요');
+    data.isAlert = true;
+    data.alertMsg = 'lighting and mood를 선택하세요!';
     return;
   } else if (data.asam == null) {
-    console.log('artistic style and mediums를 입력하세요');
+    data.isAlert = true;
+    data.alertMsg = 'artistic style and mediums를 선택하세요!';
     return;
   } else if (data.psaq == null) {
-    console.log('picture style and quality를 입력하세요');
+    data.isAlert = true;
+    data.alertMsg = 'picture style and quality를 선택하세요!';
     return;
   } else if (data.inputImg[0] == null) {
-    console.log('이미지를 입력하세요');
+    data.isAlert = true;
+    data.alertMsg = '이미지를 업로드하세요!';
     return;
   }
 
