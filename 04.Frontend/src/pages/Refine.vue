@@ -296,15 +296,15 @@ const runBtn = async () => {
   data.modeledPrompt = result.data['txt'];
   data.modeledImg = result.data['img'];
 
-  // var elements2 = document.getElementsByClassName(
-  //   'v-img__img v-img__img--contain',
-  // );
-  // elements2[0].src = 'data:image/png;base64,' + result.data['img'];
+  var elements2 = document.getElementsByClassName(
+    'v-img__img v-img__img--contain',
+  );
+  elements2[0].src = 'data:image/png;base64,' + result.data['img'];
 
-  // await nextTick(() => {
-  //   var elements1 = document.getElementsByClassName('modeledImg');
-  //   elements1[0].style.height = '360px';
-  //   elements1[0].style.width = 'unset';
-  // });
+  await nextTick(() => {
+    var elements1 = document.getElementsByClassName('modeledImg');
+    elements1[0].style.height = '360px';
+    elements1[0].style.width = 'unset';
+  });
 };
 </script>
