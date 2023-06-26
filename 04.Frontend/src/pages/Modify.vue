@@ -242,40 +242,46 @@ export default {
         hiddenTools: ['arrow', 'close', 'bucket', 'open', 'text', 'save'],
         backplateImgUrl: '/src/assets/img/modify_default.png',
         saveHandler: async (image, done) => {
-          var formData = new FormData();
-          formData.append('in_files', this.inputImg[0]);
-          var file = new File([image.asBlob()], 'mask.png', {
-            type: 'image/png',
-          });
-          formData.append('in_files', file);
-          formData.append('prompt', this.prompt);
-          formData.append('options1', this.lam);
-          formData.append('options2', this.asam);
-          formData.append('options3', this.psaq);
+          var blobimg = image.asBlob();
+          if (blobimg.size != 10775) {
+            var formData = new FormData();
+            formData.append('in_files', this.inputImg[0]);
 
-          this.isModel = true;
+            var file = new File([blobimg], 'mask.png', {
+              type: 'image/png',
+            });
+            formData.append('in_files', file);
+            formData.append('prompt', this.prompt);
+            formData.append('options1', this.lam);
+            formData.append('options2', this.asam);
+            formData.append('options3', this.psaq);
 
-          var result = await this.api.post('/Modify', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          });
+            this.isModel = true;
 
-          this.isModel = false;
-          this.modeledPrompt = result.data['txt'];
-          this.modeledImg = result.data['img'];
+            var result = await this.api.post('/Modify', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            });
 
-          var elements2 = document.getElementsByClassName(
-            'v-img__img v-img__img--contain',
-          );
-          elements2[0].src = 'data:image/png;base64,' + result.data['img'];
+            this.isModel = false;
+            this.modeledPrompt = result.data['txt'];
+            this.modeledImg = result.data['img'];
 
-          this.$nextTick(() => {
-            var elements1 = document.getElementsByClassName('modeledImg');
-            elements1[0].style.height = '360px';
-            elements1[0].style.width = 'unset';
-          });
+            var elements2 = document.getElementsByClassName(
+              'v-img__img v-img__img--contain',
+            );
+            elements2[0].src = 'data:image/png;base64,' + result.data['img'];
 
+            this.$nextTick(() => {
+              var elements1 = document.getElementsByClassName('modeledImg');
+              elements1[0].style.height = '360px';
+              elements1[0].style.width = 'unset';
+            });
+          } else {
+            this.isAlert = true;
+            this.alertMsg = '이미지에 마스킹 영역을 표시해주세요!';
+          }
           done(false);
         },
       });
