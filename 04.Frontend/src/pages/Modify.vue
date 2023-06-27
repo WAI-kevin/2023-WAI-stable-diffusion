@@ -24,7 +24,7 @@
       rows="4"
       focused
       maxlength="3900"
-      counter
+      persistent-counter
     ></v-textarea>
     <div class="d-flex grid-gap-15 mb-15">
       <v-autocomplete
@@ -334,6 +334,7 @@ export default {
       }
     },
     fnResetBtn: async function () {
+      this.inputImg = [];
       this.isModel = false;
       this.prompt = '';
       this.lam = null;
@@ -346,11 +347,14 @@ export default {
         'v-img__img v-img__img--contain',
       );
       elements2[0].src = '/src/assets/img/default_img.png';
-      await this.$nexttick(() => {
+      this.$nextTick(() => {
         var elements1 = document.getElementsByClassName('modeledImg');
         elements1[0].style.height = '32px';
         elements1[0].style.width = '32px';
       });
+      var elements = document.getElementsByClassName('ptro-center-tablecell');
+      elements[0].style.backgroundImage =
+        'url(/src/assets/img/modify_default.png)';
     },
   },
 };

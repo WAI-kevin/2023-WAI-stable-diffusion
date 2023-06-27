@@ -24,7 +24,7 @@
       rows="4"
       focused
       maxlength="3900"
-      counter
+      persistent-counter
     ></v-textarea>
     <div class="d-flex grid-gap-15 mb-15">
       <v-autocomplete
