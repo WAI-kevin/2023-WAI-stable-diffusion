@@ -57,6 +57,8 @@
       color="white"
       bg-color="rgba(166, 182, 226, 1)"
       v-model="data.inputImg"
+      accept="image/*"
+      show-size
     ></v-file-input>
     <div class="mb-15 text-right">
       <v-btn rounded="xl" size="x-large" class="btn-style-2" @click="runBtn"
@@ -105,6 +107,15 @@ const api = axios.create({
 });
 
 const data = reactive({
+  imgInputRule: [
+    value => {
+      if (value[0].size > 40000000) {
+        data.inputImg[0] = null;
+        return '이미지는 최대 40MB까지 업로드 가능합니다.';
+      }
+      return true;
+    },
+  ],
   isAlert: false,
   alertMsg: null,
   inputImg: [],
@@ -278,6 +289,10 @@ const runBtn = async () => {
   else if (data.inputImg[0] == null) {
     data.isAlert = true;
     data.alertMsg = '이미지를 업로드하세요!';
+    return;
+  } else if (data.inputImg[0].size > 40000000) {
+    data.isAlert = true;
+    data.alertMsg = '이미지는 최대 40MB까지 업로드 가능합니다.';
     return;
   }
 
