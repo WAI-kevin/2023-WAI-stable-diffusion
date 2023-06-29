@@ -58,6 +58,9 @@
       bg-color="rgba(166, 182, 226, 1)"
       v-model="this.inputImg"
       @update:modelValue="inputChng()"
+      accept="image/*"
+      show-size
+      :rules="this.imgInputRule"
     ></v-file-input>
     <div id="painterro" ref="painterro" class="mb-20"></div>
     <div class="mb-15 text-right">
@@ -114,6 +117,14 @@ export default {
   },
   data() {
     return {
+      imgInputRule: [
+        value => {
+          if (value[0].size > 2000000) {
+            return '이미지는 최대 2MB까지 업로드 가능합니다.';
+          }
+          return true;
+        },
+      ],
       isAlert: false,
       alertMsg: null,
       ps: '■ 작성 규칙 : 문장, 단어 상관없이 구분자를 "," 로 작성하기 \n    example 1. 예쁜 고양이가 케이크를 먹는다., 케이크는 초코 케이크, 옆에는 사탕을 먹는 여자아이가 있다., 꿈\n    example 2. 사무실, 여자, 3명, 안경을 낀, 마시다, 커피',
@@ -290,6 +301,9 @@ export default {
   },
   methods: {
     inputChng: function () {
+      if (this.inputImg[0].size > 2000000) {
+        return;
+      }
       var elements = document.getElementsByClassName('ptro-center-tablecell');
       if (this.inputImg[0] == null) {
         elements[0].style.backgroundImage =
@@ -318,9 +332,14 @@ export default {
       //   this.alertMsg = 'picture style and quality를 선택하세요!';
       //   return;
       // }
-      else if (this.inputImg[0] == null) {
+      if (this.inputImg[0] == null) {
         this.isAlert = true;
         this.alertMsg = '이미지를 업로드하세요!';
+        return;
+      }
+      if (this.inputImg[0].size > 2000000) {
+        this.isAlert = true;
+        this.alertMsg = '이미지는 최대 2MB까지 업로드 가능합니다.';
         return;
       }
       this.painterro.save();
