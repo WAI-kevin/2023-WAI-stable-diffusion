@@ -23,7 +23,7 @@
       v-model="data.prompt"
       rows="4"
       focused
-      maxlength="3900"
+      maxlength="200"
       persistent-counter
     ></v-textarea>
     <div class="d-flex grid-gap-15 mb-15">
