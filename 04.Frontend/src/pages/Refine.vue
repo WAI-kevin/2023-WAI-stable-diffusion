@@ -261,19 +261,21 @@ const runBtn = async () => {
     data.isAlert = true;
     data.alertMsg = '프롬프트를 입력하세요!';
     return;
-  } else if (data.lam == null) {
-    data.isAlert = true;
-    data.alertMsg = 'lighting and mood를 선택하세요!';
-    return;
-  } else if (data.asam == null) {
-    data.isAlert = true;
-    data.alertMsg = 'artistic style and mediums를 선택하세요!';
-    return;
-  } else if (data.psaq == null) {
-    data.isAlert = true;
-    data.alertMsg = 'picture style and quality를 선택하세요!';
-    return;
-  } else if (data.inputImg[0] == null) {
+  }
+  // else if (data.lam == null) {
+  //   data.isAlert = true;
+  //   data.alertMsg = 'lighting and mood를 선택하세요!';
+  //   return;
+  // } else if (data.asam == null) {
+  //   data.isAlert = true;
+  //   data.alertMsg = 'artistic style and mediums를 선택하세요!';
+  //   return;
+  // } else if (data.psaq == null) {
+  //   data.isAlert = true;
+  //   data.alertMsg = 'picture style and quality를 선택하세요!';
+  //   return;
+  // }
+  else if (data.inputImg[0] == null) {
     data.isAlert = true;
     data.alertMsg = '이미지를 업로드하세요!';
     return;

@@ -304,19 +304,21 @@ export default {
         this.isAlert = true;
         this.alertMsg = '프롬프트를 입력하세요!';
         return;
-      } else if (this.lam == null) {
-        this.isAlert = true;
-        this.alertMsg = 'lighting and mood를 선택하세요!';
-        return;
-      } else if (this.asam == null) {
-        this.isAlert = true;
-        this.alertMsg = 'artistic style and mediums를 선택하세요!';
-        return;
-      } else if (this.psaq == null) {
-        this.isAlert = true;
-        this.alertMsg = 'picture style and quality를 선택하세요!';
-        return;
-      } else if (this.inputImg[0] == null) {
+      }
+      // else if (this.lam == null) {
+      //   this.isAlert = true;
+      //   this.alertMsg = 'lighting and mood를 선택하세요!';
+      //   return;
+      // } else if (this.asam == null) {
+      //   this.isAlert = true;
+      //   this.alertMsg = 'artistic style and mediums를 선택하세요!';
+      //   return;
+      // } else if (this.psaq == null) {
+      //   this.isAlert = true;
+      //   this.alertMsg = 'picture style and quality를 선택하세요!';
+      //   return;
+      // }
+      else if (this.inputImg[0] == null) {
         this.isAlert = true;
         this.alertMsg = '이미지를 업로드하세요!';
         return;
