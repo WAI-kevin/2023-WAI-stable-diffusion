@@ -24,7 +24,7 @@
       rows="4"
       focused
       maxlength="200"
-      persistent-counter
+      counter
     ></v-textarea>
     <div class="d-flex grid-gap-15 mb-15">
       <v-autocomplete
@@ -259,7 +259,7 @@ const fnResetBtn = async () => {
 const runBtn = async () => {
   if (data.prompt == null) {
     data.isAlert = true;
-    data.alertMsg = '프롬프트를 입력하세요!';
+    data.alertMsg = '텍스트를 입력하세요!';
     return;
   }
   // else if (data.lam == null) {

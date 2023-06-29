@@ -24,7 +24,7 @@
       rows="4"
       focused
       maxlength="200"
-      persistent-counter
+      counter
     ></v-textarea>
     <div class="d-flex grid-gap-15 mb-15">
       <v-autocomplete
@@ -302,7 +302,7 @@ export default {
     runBtn: function () {
       if (this.prompt == null) {
         this.isAlert = true;
-        this.alertMsg = '프롬프트를 입력하세요!';
+        this.alertMsg = '텍스트를 입력하세요!';
         return;
       }
       // else if (this.lam == null) {
