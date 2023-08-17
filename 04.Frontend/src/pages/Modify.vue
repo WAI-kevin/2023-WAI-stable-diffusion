@@ -34,6 +34,9 @@
         label="lighting and mood"
         :items="this.lamOpt"
         v-model="this.lam"
+        multiple
+        chips
+        class="w-30"
       ></v-autocomplete>
       <v-autocomplete
         hide-details
@@ -42,6 +45,9 @@
         label="artistic style and mediums"
         :items="this.asamOpt"
         v-model="this.asam"
+        multiple
+        chips
+        class="w-30"
       ></v-autocomplete>
       <v-autocomplete
         color="white"
@@ -50,6 +56,9 @@
         label="picture style and quality"
         :items="this.psaqOpt"
         v-model="this.psaq"
+        multiple
+        chips
+        class="w-30"
       ></v-autocomplete>
     </div>
     <v-file-input
