@@ -31,7 +31,7 @@
         hide-details
         color="white"
         bg-color="rgba(166, 182, 226, 1)"
-        label="lighting and mood"
+        label="조명과 분위기"
         :items="data.lamOpt"
         v-model="data.lam"
         multiple
@@ -131,25 +131,25 @@ const data = reactive({
   ps: '■ 작성 규칙 : 문장, 단어 상관없이 구분자를 "," 로 작성하기 \n    example 1. 예쁜 고양이가 케이크를 먹는다., 케이크는 초코 케이크, 옆에는 사탕을 먹는 여자아이가 있다., 꿈\n    example 2. 사무실, 여자, 3명, 안경을 낀, 마시다, 커피',
   prompt: null,
   lamOpt: [
-    '35mm',
-    'sharp',
-    'low poly 3d render',
-    'golden hour',
-    'sunny sky',
-    'hyper realistic',
-    'epic scale',
-    'sense of awe',
-    'hypermaximalist',
-    'insane level of details',
-    'artstation HQ',
-    '80mm',
-    'photoshopped',
-    'insanely detailed',
-    'intricate',
-    'brush effect',
-    'macro',
-    'precise correct anatomy',
-    'matte painting',
+    '35mm 조명',
+    '날카로운 조명',
+    '로우폴리 3d 렌더',
+    '황금 시간대',
+    '맑은 하늘',
+    '초현실적인 분위기',
+    '에픽 스케일',
+    '경이로운 분위기',
+    '하이퍼맥시멀리스트',
+    '높은 수준의 디테일',
+    '아트스테이션 HQ',
+    '80mm 조명',
+    '포토샵',
+    '극도의 디테일',
+    '복잡한 분위기',
+    '브러쉬 효과',
+    '매크로 렌즈',
+    '골격 구조 강조',
+    '무광 페인팅',
   ],
   lam: null,
   asamOpt: [

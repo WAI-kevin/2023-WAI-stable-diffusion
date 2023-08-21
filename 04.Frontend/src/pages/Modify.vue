@@ -31,7 +31,7 @@
         hide-details
         color="white"
         bg-color="rgba(166, 182, 226, 1)"
-        label="lighting and mood"
+        label="조명과 분위기"
         :items="this.lamOpt"
         v-model="this.lam"
         multiple
@@ -141,25 +141,25 @@ export default {
       inputImg: [],
       prompt: null,
       lamOpt: [
-        '35mm',
-        'sharp',
-        'low poly 3d render',
-        'golden hour',
-        'sunny sky',
-        'hyper realistic',
-        'epic scale',
-        'sense of awe',
-        'hypermaximalist',
-        'insane level of details',
-        'artstation HQ',
-        '80mm',
-        'photoshopped',
-        'insanely detailed',
-        'intricate',
-        'brush effect',
-        'macro',
-        'precise correct anatomy',
-        'matte painting',
+        '35mm 조명',
+        '날카로운 조명',
+        '로우폴리 3d 렌더',
+        '황금 시간대',
+        '맑은 하늘',
+        '초현실적인 분위기',
+        '에픽 스케일',
+        '경이로운 분위기',
+        '하이퍼맥시멀리스트',
+        '높은 수준의 디테일',
+        '아트스테이션 HQ',
+        '80mm 조명',
+        '포토샵',
+        '극도의 디테일',
+        '복잡한 분위기',
+        '브러쉬 효과',
+        '매크로 렌즈',
+        '골격 구조 강조',
+        '무광 페인팅',
       ],
       lam: null,
       asamOpt: [
